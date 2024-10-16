@@ -52,21 +52,52 @@ print("Juan ha leído más libros que María pero menos que Pedro:",
 )
 
 print("Pedro no ha visitado Chile y tampoco le gusta el cine:",
-    #TODO
+    "Chile" not in pedro.paises_visitados and "cine" not in pedro.hobbies
 )
 
 print("El último libro que María ha leído es '1984' y Juan no lo ha leído aún:",
-    #TODO
+    len(maria.libros_leidos)>0 and maria.libros_leidos[-1] == "1984" and "1984" not in juan.libros_leidos 
 )
 
 print("Pedro ha visitado más países que Juan o ha leído más libros que María:",
-    #TODO
+    len(pedro.paises_visitados)< len(juan.paises_visitados) or len(pedro.libros_leidos)>len(maria.paises_visitados)
 )
 
 print("María tiene licencia de conducir o ha leído 'Moby Dick', pero no ambas cosas",
-    #TODO
+    maria.tiene_licencia or 'Moby Dick' in maria.libros_leidos and\
+    not (maria.tiene_licencia and 'Moby Dick' in maria.libros_leidos) 
 )
 
 print("Juan ha visitado España o Francia, pero no ambos",
-    #TODO
+    "España" in juan.paises_visitados or "Francia" in juan.paises_visitados and\
+    not ("España" in juan.paises_visitados and "Francia" in juan.paises_visitados)
+)
+
+'''
+Para las siguientes expresiones, se precisan dos operadores que aún no hemos estudiado:
+
+Operador de intersección de conjuntos &: devuelve un conjunto con los elementos comunes a los dos conjuntos sobre los que se opera.
+Método index del tipo list: recibe un valor y devuelve la posición de la lista en la que aparece por primera vez dicho valor. ¡CUIDADO! Si no se encuentra el valor en la lista, se produce un error de tipo ValueError.
+'''
+
+print("Pedro y Juan comparten al menos un hobby:",
+    len(pedro.hobbies & juan.hobbies) > 0
+)
+
+print("Juan y María han visitado al menos un país en común o ambos tienen el hobby de ir al cine:",
+    len(juan.paises_visitados & maria.paises_visitados) > 0 or
+    ("cine" in juan.hobbies and "cine" in maria.hobbies)
+    #no serian necesarios los parentesis dado q a and se le conoce
+    #como multiplicador lógico y la multiplicacón tiene prioridad ante la suma or
+    #otra posibilidad seria:
+    #len(juan.paises_visitados & maria.paises_visitados) > 0 or\ 
+    #("cine" in juan.hobbies & maria.hobbies)
+    
+)
+
+print("Juan ha leído 'Don Quijote' antes que 'El Principito':",
+    "Don Quijote" in juan.libros_leidos and "El Principito" in juan.libros_leidos and\
+    juan.libros_leidos.index("Don Quijote") < juan.libros_leidos.index("El Principito")
+    #con el operador and, en cuanto se encuentra con unn false acaba la ejecución, por lo que no se llega
+    #a dar un error si "Don Quijote" no está en la lista
 )
